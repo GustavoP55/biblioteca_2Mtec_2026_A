@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exemplares', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('EXEMPLARES', function (Blueprint $table) {
+            $table->id('EXMCODIGO');
+            $table->foreignId('EXMLIVRO')
+                ->constrained('LIVROS', 'LVRCODIGO')
+                ->onDelete('restrict');
+            $table->date('EXMDTAQUISICAO')->nullable();
+            $table->boolean('EXMDISPONIVEL')->default(true);
         });
     }
 
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('exemplares');
+        Schema::dropIfExists('EXEMPLARES');
     }
 };
