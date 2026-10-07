@@ -10,4 +10,9 @@ class Nivel extends Model
     protected $primaryKey = 'NVLCODIGO';
     public $timestamps = false;
     protected $fillable = ['NVLNOME'];
+
+    public function usuarios()
+    {
+        return $this->hasMany(Usuario::class, 'USRNIVEL', 'NVLCODIGO');
+    }
 }

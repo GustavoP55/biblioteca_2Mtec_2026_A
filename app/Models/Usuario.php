@@ -7,5 +7,22 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Usuario extends Authenticatable
 {
-    //
+    protected $table = 'USUARIOS';
+    protected $primaryKey = 'USRCODIGO';
+    public $timestamps = false;
+    protected $hidden = ['USRSENHA'];
+
+    protected $casts = [
+        'USRDTCAD' => 'date',
+    ];
+
+    public function nivel()
+    {
+        return $this->belongsTo(Nivel::class, 'USRNIVEL', 'NVLCODIGO');
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->USRSENHA;
+    }
 }
